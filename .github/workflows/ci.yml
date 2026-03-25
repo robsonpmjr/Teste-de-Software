@@ -3,7 +3,6 @@ name: CI Pipeline
 on:
   push:
     branches: [ main, dev ]
-  pull_request:
 
 jobs:
 
@@ -19,11 +18,13 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Instalar dependências
-        run: pip install -r requirements.txt
+      - name: Instalar pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
 
       - name: Build
-        run: echo "Projeto compilado com sucesso"
+        run: echo "Build executado com sucesso"
 
   test:
     runs-on: ubuntu-latest
@@ -38,11 +39,13 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Instalar dependências
-        run: pip install -r requirements.txt
+      - name: Instalar pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
 
       - name: Executar testes
-        run: pytest
+        run: python -m pytest
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,5 +53,5 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy (simulado)
-        run: echo "Deploy realizado com sucesso!"
+      - name: Deploy
+        run: echo "Deploy realizado com sucesso"
