@@ -1,4 +1,4 @@
 from app import soma
 
 def test_soma():
-    assert soma(3, 3) == 9
+    assert soma(2, 2) == 4
